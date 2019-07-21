@@ -48,12 +48,6 @@ module.exports = {
                                                 success: true,
                                                 token: generateToken(id)
                                             });
-                                        })
-                                        .catch(err => {
-                                            res.status(500).json({
-                                                success: false,
-                                                error: err
-                                            });
                                         });
                                 });
                         }
@@ -72,5 +66,26 @@ module.exports = {
                 error: 'Usuário e senha são necessários'
             });
         }
-    }
+    },
+
+    async deleteUser(req, res) {
+        let user = await userModel.findOne({ '_id': req.userId });
+
+        if (!req.body.username) return res.status(400).json({ success: false, message: 'O username é obrigatório'});
+
+        let userDelete = await userModel.findOne({ 'username': req.body.username });
+
+        if (!userDelete) return res.status(400).json({ success: false, message: 'Usuário não encontrado'});
+
+        if(!user.isAdmin === true) return res.status(401).json({ success: false, message: 'Somente adms possuem autorização para isso'});
+
+        userDelete.remove(() => {
+            res.status(200).json({
+                success: true,
+                message: `Usuário ${req.body.username} teve sua conta apagada`
+            });
+        });
+    },
+
+    
 };
