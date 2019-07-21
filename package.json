@@ -1,0 +1,29 @@
+{
+  "name": "api-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv-safe": "^6.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.5",
+    "require-dir": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HyugoKun/api-nodejs.git"
+  },
+  "author": "HyugoKun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HyugoKun/api-nodejs/issues"
+  },
+  "homepage": "https://github.com/HyugoKun/api-nodejs#readme"
+}
