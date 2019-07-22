@@ -4,15 +4,15 @@ const jwt = require('jsonwebtoken');
 
 const userModel = mongoose.model('User');
 
-module.exports = {
+function generateToken(id) {
+    const token = jwt.sign({ id }, process.env.SECRET, {
+        expiresIn: 86400
+    });
 
-    generateToken(id) {
-        const token = jwt.sign({ id }, process.env.SECRET, {
-            expiresIn: 86400
-        });
-    
-        return token;
-    },
+    return token;
+}
+
+module.exports = {
 
     async allUsers(req, res) {
         let users = await userModel.find();

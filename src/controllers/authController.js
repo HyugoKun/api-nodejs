@@ -5,6 +5,14 @@ const userController = require('./userController');
 
 const userModel = mongoose.model('User');
 
+function generateToken(id) {
+    const token = jwt.sign({ id }, process.env.SECRET, {
+        expiresIn: 86400
+    });
+
+    return token;
+}
+
 module.exports = {
 
     async loginUser(req, res) {
@@ -17,7 +25,7 @@ module.exports = {
                     console.log(`OLHA AQUI: ${user.password} --- ${user.id}`);
                     res.status(200).json({
                         success: true,
-                        token: userController.generateToken(user.id)
+                        token: generateToken(user.id)
                     });
                 } else {
                     res.status(500).json({
